@@ -1,10 +1,15 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 import pytest
 
-from app.config import Settings
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from app.config import Settings  # noqa: E402
 
 
 def build_settings(tmp_path: Path, **overrides) -> Settings:
