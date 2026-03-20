@@ -1,4 +1,3 @@
-date,task,hours,notes
-2026-03-18,"Assignment review, PDF alignment, architecture decisions",1.8,Validated deliverables and locked the lean FastAPI plus local vector store approach.
-2026-03-19,"Environment setup, credentials, delivery-path validation",1.2,"Prepared Jira, OpenAI, SMTP, and confirmed Google Chat webhook restrictions."
-2026-03-20,"Implementation, tests, indexing flow, submission docs",4.4,"Built the app, webhook flow, SMTP delivery, semantic search, fixtures, and docs."
+﻿"Description","Billable","Duration","Member","Email","Project","Tags","Start date","Start time","Stop date","Stop time"
+"-","Yes","2:45:01","[redacted]","[redacted]","test","-","2026-03-20","14:41:46","2026-03-20","17:26:47"
+"-","Yes","1:40:08","[redacted]","[redacted]","test","-","2026-03-18","21:26:48","2026-03-18","23:06:56"

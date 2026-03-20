@@ -23,7 +23,7 @@ Google Chat remains in the architecture because it is the intended channel from 
 - Notification evidence: `artifacts/demo/notification-demo.md` (public redaction applied to live tenant and ticket text)
 - Architecture and tool rationale: `docs/architecture.md`
 - Time report summary: `docs/time-report.md`
-- Tool-generated time report artifact: `artifacts/time-report/mindfriend-time-report.csv`
+- Toggl Track CSV time report artifact: `artifacts/time-report/mindfriend-time-report.csv`
 
 ## 5-Minute Reviewer Path
 
