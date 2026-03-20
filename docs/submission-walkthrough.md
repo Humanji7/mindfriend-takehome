@@ -66,7 +66,9 @@ curl http://127.0.0.1:8000/health
 
 Expected result:
 
-- `{"status":"ok","environment":"dev"}`
+- `{"status":"ok","environment":"development"}`
+- `POST /search` returns an empty result until a local index exists
+- `POST /webhooks/jira` returns `503` until `JIRA_WEBHOOK_SECRET` is configured
 
 ## Credentialed Live Re-Run
 

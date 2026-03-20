@@ -85,10 +85,14 @@ If the summary step is disabled or fails, the service falls back to a determinis
   Jira requests retry `429` responses with backoff and honor `Retry-After` when present.
 - LLM or network failure during notification formatting
   Notification text falls back to a deterministic snippet and still delivers.
+- Notification delivery failure
+  `/webhooks/jira` returns a retryable `503` instead of acknowledging success before the message is delivered.
 - Missing Google Chat webhook
   The notifier automatically uses SMTP email when enabled, which is the current demo path.
 - Empty local index
   `/search` returns a controlled empty result instead of crashing.
+- Missing OpenAI embedding credentials
+  `/search` returns a controlled `503` if semantic retrieval is requested without `OPENAI_API_KEY`.
 - Low-confidence retrieval
   `/search` suppresses weak embedding matches instead of returning irrelevant tickets just because they were the top remaining rows.
 

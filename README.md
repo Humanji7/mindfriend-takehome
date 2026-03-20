@@ -29,32 +29,47 @@ The take-home targets Python 3.12+, but this repo is configured for `>=3.12,<3.1
 uv sync --extra dev
 ```
 
-2. Confirm `.env` is populated.
-   The live Jira re-run commands below require Jira, OpenAI, and notification credentials.
-
-3. Start the API:
+2. Start the API:
 
 ```bash
 uv run uvicorn app.main:app --reload
 ```
 
-4. Build the first local semantic index:
+3. Inspect the local health endpoint:
+
+```bash
+curl http://127.0.0.1:8000/health
+```
+
+Expected zero-config behavior:
+
+- the API starts without a `.env` file
+- `/health` returns `{"status":"ok","environment":"development"}`
+- `/search` returns an empty result until a local index exists
+- `/webhooks/jira` returns a controlled `503` until `JIRA_WEBHOOK_SECRET` is configured
+
+## Credentialed Live Re-Run
+
+Use this only if `.env` is populated with working Jira, OpenAI, and notification credentials.
+
+1. Build the Jira-backed local semantic index:
 
 ```bash
 uv run python scripts/bootstrap_index.py
 ```
 
-5. Query the index:
+2. Query the index:
 
 ```bash
 uv run python scripts/demo_query.py "have we fixed slow mobile login before?"
 ```
 
-If the Jira project only contains placeholder tickets or missing descriptions, the search flow now returns no matches instead of inventing a low-confidence result. The positive paraphrase case is covered in `tests/test_search.py`.
+If the Jira project only contains placeholder tickets or missing descriptions, the search flow returns no matches instead of inventing a low-confidence result. The positive paraphrase case is covered in `tests/test_search.py`.
 
 ## Reviewer Path
 
 - Zero-config review: read `docs/submission-walkthrough.md`, inspect `artifacts/demo/`, and run `uv run pytest` plus `uv run ruff check app tests scripts`.
+- Local app startup: `uv run uvicorn app.main:app --reload`, then inspect `/health`, `/search`, and `/webhooks/jira` behavior without credentials.
 - Credentialed live re-run: populate `.env`, rebuild the Jira index, run semantic queries, and trigger a Jira `Done` event.
 
 ## API Endpoints

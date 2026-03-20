@@ -36,8 +36,19 @@ def receive_jira_webhook(
     message = formatter.format_ticket_notification(ticket)
     delivery = notifier.send(message)
     delivered = delivery.delivered if hasattr(delivery, "delivered") else bool(delivery.get("delivered"))
+    if not delivered:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "status": "failed",
+                "ticket_key": ticket.key,
+                "channel": delivery.get("channel"),
+                "brief_description": message.brief_description,
+                "detail": delivery.get("detail"),
+            },
+        )
     return {
-        "status": "processed" if delivered else "failed",
+        "status": "processed",
         "ticket_key": ticket.key,
         "channel": delivery.get("channel"),
         "brief_description": message.brief_description,

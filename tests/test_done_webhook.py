@@ -23,6 +23,12 @@ class StubNotifier:
         return {"channel": "email", "delivered": True}
 
 
+class FailingNotifier(StubNotifier):
+    def send(self, message: NotificationMessage):
+        self.messages.append(message)
+        return {"channel": "none", "delivered": False, "detail": "smtp down"}
+
+
 def load_fixture(name: str) -> dict:
     return json.loads((FIXTURES_DIR / name).read_text())
 
@@ -95,3 +101,25 @@ def test_done_status_override_works_without_status_category_done(tmp_path: Path)
     assert response.json()["status"] == "processed"
     assert notifier.messages[0].ticket_key == "MIND-42"
 
+
+def test_done_webhook_returns_503_when_delivery_fails(tmp_path: Path) -> None:
+    settings = build_settings(tmp_path)
+    notifier = FailingNotifier()
+    app = create_app(
+        settings=settings,
+        service_overrides={
+            "formatter": NotificationFormatter(settings, NullLLMClient()),
+            "notifier": notifier,
+        },
+    )
+    client = TestClient(app)
+
+    response = client.post(
+        "/webhooks/jira?secret=secret123",
+        json=load_fixture("done-event.json"),
+    )
+
+    assert response.status_code == 503
+    assert response.json()["detail"]["status"] == "failed"
+    assert response.json()["detail"]["detail"] == "smtp down"
+    assert notifier.messages[0].ticket_key == "MIND-42"

@@ -2,7 +2,7 @@ Command:
 uv run python scripts/bootstrap_index.py
 
 Observed output:
-Indexed 9 Jira tickets into data/vector_store1
+Indexed 9 Jira tickets into data/vector_store.json
 
 Public submission note:
 The live Jira tenant, ticket keys, and ticket titles are redacted in this copy of the artifact.

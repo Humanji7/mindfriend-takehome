@@ -10,6 +10,10 @@ from app.config import Settings
 logger = logging.getLogger(__name__)
 
 
+class SemanticSearchUnavailableError(RuntimeError):
+    """Raised when semantic search dependencies are not configured."""
+
+
 class EmbeddingClient(Protocol):
     def embed_text(self, text: str) -> list[float]:
         ...
@@ -23,10 +27,14 @@ class EmbeddingClient(Protocol):
 
 class NullLLMClient:
     def embed_text(self, text: str) -> list[float]:
-        raise RuntimeError("OPENAI_API_KEY is required for semantic search")
+        raise SemanticSearchUnavailableError(
+            "Semantic search is unavailable until OPENAI_API_KEY is configured."
+        )
 
     def embed_texts(self, texts: Sequence[str]) -> list[list[float]]:
-        raise RuntimeError("OPENAI_API_KEY is required for semantic search")
+        raise SemanticSearchUnavailableError(
+            "Semantic search is unavailable until OPENAI_API_KEY is configured."
+        )
 
     def summarize_ticket(self, title: str, description: str, max_chars: int) -> str | None:
         return None
@@ -91,4 +99,3 @@ class OpenAILLMClient:
                 logger.warning("OpenAI rate limited, retrying attempt %s", attempt)
                 time.sleep(delay)
                 delay *= 2
-
