@@ -1,0 +1,41 @@
+{
+  "webhookEvent": "jira:issue_updated",
+  "issue": {
+    "key": "MIND-13",
+    "fields": {
+      "summary": "Refine invoice webhook logging",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Extra diagnostics were added but the ticket is still in progress."
+              }
+            ]
+          }
+        ]
+      },
+      "status": {
+        "name": "In Progress",
+        "statusCategory": {
+          "key": "indeterminate"
+        }
+      },
+      "labels": ["finance"]
+    }
+  },
+  "changelog": {
+    "items": [
+      {
+        "field": "assignee",
+        "fromString": "Alice",
+        "toString": "Bob"
+      }
+    ]
+  }
+}
+

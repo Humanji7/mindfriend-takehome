@@ -1,0 +1,41 @@
+{
+  "webhookEvent": "jira:issue_updated",
+  "issue": {
+    "key": "MIND-42",
+    "fields": {
+      "summary": "Fix slow mobile login flow",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Users saw long waits during the mobile login flow after the latest release."
+              }
+            ]
+          }
+        ]
+      },
+      "status": {
+        "name": "Done",
+        "statusCategory": {
+          "key": "done"
+        }
+      },
+      "labels": ["mobile", "auth"]
+    }
+  },
+  "changelog": {
+    "items": [
+      {
+        "field": "status",
+        "fromString": "In Progress",
+        "toString": "Done"
+      }
+    ]
+  }
+}
+

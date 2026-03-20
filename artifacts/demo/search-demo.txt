@@ -1,0 +1,50 @@
+Command:
+uv run python scripts/bootstrap_index.py
+
+Observed output:
+Indexed 9 Jira tickets into data/vector_store1
+
+Public submission note:
+The live Jira tenant, ticket keys, and ticket titles are redacted in this copy of the artifact.
+
+Command:
+uv run python scripts/demo_query.py "[redacted paraphrase query A]"
+
+Observed output:
+<redacted-ticket-a1> | [redacted live Jira title] | score=0.3777
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-a1>
+<redacted-ticket-a2> | [redacted live Jira title] | score=0.2256
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-a2>
+<redacted-ticket-a3> | [redacted live Jira title] | score=0.2049
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-a3>
+
+Command:
+uv run python scripts/demo_query.py "[redacted paraphrase query B]"
+
+Observed output:
+<redacted-ticket-b1> | [redacted live Jira title] | score=0.503
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-b1>
+<redacted-ticket-b2> | [redacted live Jira title] | score=0.2938
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-b2>
+<redacted-ticket-b3> | [redacted live Jira title] | score=0.2914
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-b3>
+
+Command:
+uv run python scripts/demo_query.py "[redacted paraphrase query C]"
+
+Observed output:
+<redacted-ticket-c1> | [redacted live Jira title] | score=0.5688
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-c1>
+<redacted-ticket-c2> | [redacted live Jira title] | score=0.3702
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-c2>
+<redacted-ticket-c3> | [redacted live Jira title] | score=0.2788
+  reason: Matched by embedding similarity across indexed Jira ticket text.
+  link:   https://<redacted-jira-host>/browse/<redacted-ticket-c3>
